@@ -29,6 +29,7 @@ def get_state():
 	states = ["NCR", "Uttar Pradesh", "Haryana", "Rajasthan"]
 	return states[random.randint(0, len(states) - 1)]
 
+
 def get_city(state):
 	city_dict = {
 		"NCR": ("Delhi", "Gurgaon", "Noida"),
@@ -37,8 +38,8 @@ def get_city(state):
 		"Rajasthan": ("Jaipur", "Jaiselmer")
     }
 
-	city = city_dict[state]
-	return {state: city[random.randint(0, len(city) - 1)]}
+	city = city_dict[state][random.randint(0, len(city_dict[state]) - 1)]
+	return {state: city, "check": state + " " + city}
 
 
 def get_gender():
@@ -55,7 +56,7 @@ def get_month():
 def get_year():
 	return random.randint(1900, 2100)
 
-@pytest.fixture()
+
 def get_user_date():
 	gender = get_gender()
 	location = get_city(get_state())
@@ -88,3 +89,26 @@ def get_user_date():
 				"mobile_phone": "8939777666",
 				"location": location
 				}
+
+
+@pytest.fixture(scope='function')
+def data():
+	# Create person data
+	person = get_user_date()
+	person_date = person["birthDay"].split()
+	# Check_filling_form
+	check_result = [
+		'Student Name', person["firstName"] + " " + person["lastName"],
+		'Student Email', person["userEmail"],
+		'Gender', person["gender"],
+		'Mobile', person["mobile_phone"],
+		'Date of Birth', f'{person_date[0]} {person_date[1]},{person_date[2]}',
+		'Subjects', 'Computer Science, English',
+		'Hobbies', 'Reading',
+		'Picture', 'picture.jpg',
+		'Address', 'https://demoqa.com/automation-practice-form',
+		'State and City', person["location"]["check"]
+		]
+
+	return {"test": person,
+			"check": check_result}
