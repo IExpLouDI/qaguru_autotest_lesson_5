@@ -2,7 +2,7 @@ from selene import have
 import os
 
 
-def test_search(site, data):
+def test_insert_personal_data(site, data):
 	site.execute_script("$('#fixedban').remove()")
 	site.execute_script("$('footer').remove()")
 	location = list(data["test"]["location"].items())[0]
@@ -23,7 +23,7 @@ def test_search(site, data):
 	site.element(f".react-datepicker__day--0{data['test']['birthDay'].split()[0]}").click()
 
 	site.element('input[id = subjectsInput]').type("Com").press_enter().type("Eng").press_enter()
-	site.element('input[id=hobbies-checkbox-2] ~ label').click()
+	site.element('[for=hobbies-checkbox-2]').click()
 	site.element("#uploadPicture").send_keys(os.path.abspath("../files/picture.jpg"))
 	site.element("#currentAddress").type(f"{site.driver.current_url}")
 	site.element('#state input').type(location[0]).press_enter()
