@@ -1,10 +1,11 @@
 from selene import have
 import os
+from model.pages.registration_page import RegistrationPage
 
 
 def test_insert_personal_data(site, data):
-	site.execute_script("$('#fixedban').remove()")
-	site.execute_script("$('footer').remove()")
+	# site.execute_script("$('#fixedban').remove()")
+	# site.execute_script("$('footer').remove()")
 	location = list(data["test"]["location"].items())[0]
 
 	site.element('[id=firstName]').type(data["test"]["firstName"])
