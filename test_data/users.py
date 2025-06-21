@@ -1,4 +1,5 @@
 from random import randint, choice
+from test_data.gender import Gender
 
 
 class UserInfo:
@@ -49,7 +50,7 @@ class UserInfo:
 			return {"firstName": "Игорь",
 					"lastName": "Тестов",
 					"userEmail": "test@mail.ru",
-					"gender": "Male",
+					"gender": Gender.male.value,
 					"birthDay": birthday,
 					"mobile_phone": "8989567453",
 					"city": city,
@@ -59,7 +60,7 @@ class UserInfo:
 			return {"firstName": "Лара",
 					"lastName": "Тестова",
 					"userEmail": "lara_t@mail.ru",
-					"gender": "Female",
+					"gender": Gender.female.value,
 					"birthDay": birthday,
 					"mobile_phone": "8939777453",
 					"city": city,
@@ -69,7 +70,7 @@ class UserInfo:
 			return {"firstName": "Пользователь",
 					"lastName": "Неопределён",
 					"userEmail": "secret_g@mail.ru",
-					"gender": "Other",
+					"gender": Gender.other.value,
 					"birthDay": birthday,
 					"mobile_phone": "8939777666",
 					"city": city,

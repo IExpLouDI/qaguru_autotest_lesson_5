@@ -6,32 +6,19 @@ from utils.paths import PATH_PICTURE
 class RegistrationPage:
 	def __init__(self, browser):
 		self.__browser = browser
+		self._user_first_name = self.__browser.element('[id=firstName]')
+		self._user_last_name = self.__browser.element('[id=lastName]')
+		self._user_email = self.__browser.element('[id=userEmail]')
+		self._user_mobile_phone = self.__browser.element('[id=userNumber]')
+
 
 	def open_form(self):
 		self.__browser.open("https://demoqa.com/automation-practice-form")
 		self.__browser.execute_script("$('#fixedban').remove()")
 		self.__browser.execute_script("$('footer').remove()")
-		return self
-
-
-	def fill_first_name(self, value):
-		self.__browser.element('[id=firstName]').type(value)
-		return self
-
-	def fill_last_name(self, value):
-		self.__browser.element('[id=lastName]').type(value)
-		return self
-
-	def fill_user_email(self, value):
-		self.__browser.element('[id=userEmail]').type(value)
-		return self
 
 	def select_gender(self, value):
 		self.__browser.element(f"input[value='{value}'] + label").click()
-		return self
-
-	def fill_user_mobile_number(self, value):
-		self.__browser.element('[id=userNumber]').type(value)
 		return self
 
 	def select_birthday(self, values:list):
@@ -82,10 +69,10 @@ class RegistrationPage:
 		self.__browser.element(".table-responsive").all("td").should(have.exact_texts(person_info))
 
 	def registration(self, user:UserInfo):
-		self.fill_first_name(user.user_info["firstName"])
-		self.fill_last_name(user.user_info["lastName"])
-		self.fill_user_email(user.user_info["userEmail"])
-		self.fill_user_mobile_number(user.user_info["mobile_phone"])
+		self._user_first_name.type(user.user_info["firstName"])
+		self._user_last_name.type(user.user_info["lastName"])
+		self._user_email.type(user.user_info["userEmail"])
+		self._user_mobile_phone.type(user.user_info["mobile_phone"])
 		self.select_gender(user.user_info["gender"])
 
 		self.select_birthday(user.user_info["birthDay"].split())
