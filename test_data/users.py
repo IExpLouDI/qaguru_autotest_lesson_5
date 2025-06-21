@@ -12,8 +12,9 @@ class UserInfo:
 		states = ["NCR", "Uttar Pradesh", "Haryana", "Rajasthan"]
 		return choice(states)
 
-	@property
-	def city(self, state=state):
+
+	def city(self, state):
+
 		city_dict = {
 			"NCR": ("Delhi", "Gurgaon", "Noida"),
 			"Uttar Pradesh": ("Agra", "Lucknow", "Merrut"),
@@ -21,8 +22,7 @@ class UserInfo:
 			"Rajasthan": ("Jaipur", "Jaiselmer")
 		}
 
-		city = city_dict[state][randint(0, len(city_dict[state]) - 1)]
-		return {state: city, "check": state + " " + city}
+		return city_dict[state][randint(0, len(city_dict[state]) - 1)]
 
 	@property
 	def gender(self):
@@ -40,7 +40,9 @@ class UserInfo:
 
 	def get_user(self):
 		gender = self.gender
-		location = self.city
+		state = self.state
+		city = self.city(state)
+		# location = self.city
 		birthday = "01 " + self.month + " " + str(self.year)
 
 		if gender == "Male":
@@ -50,7 +52,8 @@ class UserInfo:
 					"gender": "Male",
 					"birthDay": birthday,
 					"mobile_phone": "8989567453",
-					"location": location
+					"city": city,
+					"state": state
 					}
 		elif gender == "Female":
 			return {"firstName": "Лара",
@@ -59,7 +62,8 @@ class UserInfo:
 					"gender": "Female",
 					"birthDay": birthday,
 					"mobile_phone": "8939777453",
-					"location": location
+					"city": city,
+					"state": state
 					}
 		else:
 			return {"firstName": "Пользователь",
@@ -68,5 +72,6 @@ class UserInfo:
 					"gender": "Other",
 					"birthDay": birthday,
 					"mobile_phone": "8939777666",
-					"location": location
+					"city": city,
+					"state": state
 					}
