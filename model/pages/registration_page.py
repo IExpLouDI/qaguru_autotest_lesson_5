@@ -1,4 +1,6 @@
 from selene import have
+from test_data.users import UserInfo
+from utils.paths import PATH_PICTURE
 
 
 class RegistrationPage:
@@ -78,3 +80,19 @@ class RegistrationPage:
 
 	def should_person_info(self, person_info):
 		self.__browser.element(".table-responsive").all("td").should(have.exact_texts(person_info))
+
+	def registration(self, user:UserInfo):
+		self.fill_first_name(user.user_info["firstName"])
+		self.fill_last_name(user.user_info["lastName"])
+		self.fill_user_email(user.user_info["userEmail"])
+		self.fill_user_mobile_number(user.user_info["mobile_phone"])
+		self.select_gender(user.user_info["gender"])
+
+		self.select_birthday(user.user_info["birthDay"].split())
+		self.type_subjects()
+		self.select_hobbies()
+		self.upload_file(PATH_PICTURE)
+		self.type_current_address()
+		self.select_state(user.user_info["state"])
+		self.select_city(user.user_info["city"])
+		self.press_submit()

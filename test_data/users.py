@@ -75,3 +75,19 @@ class UserInfo:
 					"city": city,
 					"state": state
 					}
+
+	def user_full_info(self):
+		user_birthday = self.user_info["birthDay"].split()
+
+		return [
+		'Student Name', self.user_info["firstName"] + " " + self.user_info["lastName"],
+		'Student Email', self.user_info["userEmail"],
+		'Gender', self.user_info["gender"],
+		'Mobile', self.user_info["mobile_phone"],
+		'Date of Birth', f'{user_birthday[0]} {user_birthday[1]},{user_birthday[2]}',
+		'Subjects', 'Computer Science, English',
+		'Hobbies', 'Reading',
+		'Picture', 'picture.jpg',
+		'Address', 'https://demoqa.com/automation-practice-form',
+		'State and City', " ".join([self.user_info["state"], self.user_info["city"]])
+	]
